@@ -1,0 +1,21 @@
+<h1>All Movies</h1>
+
+<ul>
+  <% @movies.each do |movie| %>
+    <li>
+      <%= link_to movie.title, movie_path(movie) %>
+      <%= movie.title %>
+      <%= movie.overview %>
+      <%= movie.poster_url %> |
+      <%= movie.rating %> |
+  </li>
+  <% end %>
+
+</ul>
+
+<%= link_to "go back ", movies_path %>
+
+
+<%#
+<%= link_to "update", edit_movie_path(movie)  %> |
+      <%# <%= link_to "delete", movie_path(movie), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
