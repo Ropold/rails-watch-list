@@ -1,4 +1,4 @@
-<h1>hi there</h1>
+<h1>Lists of Movies</h1>
 
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
@@ -12,10 +12,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">New List</a>
+            <a class="nav-link" href="<%= new_list_path %>">New List</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">My Lists</a>
+            <a class="nav-link" href="<%= lists_path %>">My Lists</a>
           </li>
           <li class="nav-item dropdown">
             <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
@@ -37,7 +37,8 @@
 <% @lists.each do |list| %>
 
   <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
-  <%= list.name %>
+  <%= link_to list.name, list_path(list) %>
+
   </div>
 
   <% end %>

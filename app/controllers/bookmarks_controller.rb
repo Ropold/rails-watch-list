@@ -1,22 +1,29 @@
 class BookmarksController < ApplicationController
   def new
-    @bookmarks = Bookmark.new
+    @bookmark = Bookmark.new
+    @list = List.find(params[:list_id])
   end
   def create
-    @bookmarks = Bookmark.new(bookmark_params)
-    @bookmarks.save
-    redirect_to bookmarks_path(@bookmarks)
+
+    @bookmark = Bookmark.new(bookmark_params)
+    @list = List.find(params[:list_id])
+    @bookmark.list = @list
+    if @bookmark.save
+      redirect_to list_path(@list)
+    else
+      render :new
+    end
   end
 
   def destroy
-    @bookmarks = Bookmark.find(params[:id])
-    @bookmarks.destroy
-    redirect_to bookmarks_path(@bookmarks)
+    @bookmark = Bookmark.find(params[:id])
+    @bookmark.destroy
+    redirect_to list_path(@bookmark.list)
   end
 
   private
 
-  def restaurant_params
-    params.require(:bookmark).permit(:comment)
+  def bookmark_params
+    params.require(:bookmark).permit(:comment, :movie_id)
   end
 end

@@ -4,20 +4,23 @@ class ListsController < ApplicationController
   end
 
   def show
-    @lists = List.find(params[:id])
+    @list = List.find(params[:id])
   end
   def new
-    @lists = List.new
+    @list = List.new
   end
   def create
-    @lists = List.new(list_params)
-    @lists.save
-    redirect_to lists_path(@lists)
+    @list = List.new(list_params)
+    if @list.save
+      redirect_to lists_path(@list)
+    else
+      render :new
+    end
   end
 
 private
 
   def list_params
-  params.require(:lists).permit(:comment)
+    params.require(:list).permit(:name)
   end
 end
